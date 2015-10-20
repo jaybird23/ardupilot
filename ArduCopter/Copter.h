@@ -121,6 +121,11 @@
 #include "config.h"
 #include "config_channels.h"
 
+/****************************************************
+ * Added for ACA test mode
+ ***************************************************/
+#include "ACA_AI.h"
+
 // Local modules
 #include "Parameters.h"
 
@@ -726,6 +731,17 @@ private:
     void autotune_updating_p_up(float &tune_p, float tune_p_max, float tune_p_step_ratio, float target, float measurement_max);
     void autotune_updating_p_up_d_down(float &tune_d, float tune_d_min, float tune_d_step_ratio, float &tune_p, float tune_p_min, float tune_p_max, float tune_p_step_ratio, float target, float measurement_min, float measurement_max);
     void autotune_twitching_measure_acceleration(float &rate_of_change, float rate_measurement, float &rate_measurement_max);
+    /*************************************************************
+     * Added for ACA test
+     *************************************************************/
+    bool aca_init(bool ignore_checks);
+    void aca_run();
+//    static ACA_AI ai;
+//    int FPGA_read_state = 0;
+//    static bool FPGA_start = 0;
+//    static bool land_override = 0;
+
+
     bool brake_init(bool ignore_checks);
     void brake_run();
     bool circle_init(bool ignore_checks);

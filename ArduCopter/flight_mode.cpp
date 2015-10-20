@@ -94,6 +94,12 @@ bool Copter::set_mode(uint8_t mode)
         case BRAKE:
             success = brake_init(ignore_checks);
             break;
+        /****************************************
+         * Added for new ACA test mode
+         ****************************************/
+        case ACA:
+            success = aca_init(ignore_checks);
+            break;
 
         default:
             success = false;
@@ -206,6 +212,12 @@ void Copter::update_flight_mode()
         case BRAKE:
             brake_run();
             break;
+        /*********************************************
+         * Added for new ACA test mode
+         *********************************************/
+        case ACA:
+            aca_run();
+            break;
     }
 }
 
@@ -260,6 +272,10 @@ bool Copter::mode_requires_GPS(uint8_t mode) {
         case DRIFT:
         case POSHOLD:
         case BRAKE:
+        /**************************************
+         * Added for new ACA test mode
+         **************************************/
+        case ACA:
             return true;
         default:
             return false;
@@ -361,6 +377,12 @@ void Copter::print_flight_mode(AP_HAL::BetterStream *port, uint8_t mode)
         break;
     case BRAKE:
         port->print_P(PSTR("BRAKE"));
+        break;
+    /***********************************************
+     * Added for ACA test mode
+     ***********************************************/
+    case ACA:
+        port->print_P(PSTR("ACA"));
         break;
     default:
         port->printf_P(PSTR("Mode(%u)"), (unsigned)mode);
